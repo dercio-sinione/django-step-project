@@ -1,0 +1,38 @@
+{% extends 'webapp/base.html' %}  
+
+{% block content %} 
+{% include 'webapp/slide.html' %}
+<div class="faith-blog-area section-padding-100-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 mb-0">
+        <div class="section-heading text-center mx-auto">
+          <h3>Projectos</h3>
+          {% if projectoSubtitulo %}
+          <p>{{ projectoSubtitulo }}</p>
+          {% endif %}
+          </div>
+      </div>
+      <!-- {% comment %} PROJECTOS CONTENT {% endcomment %} -->
+      {% if projectos %} {% for projecto in projectos %}
+      <div class="col-12 col-sm-6 col-lg-4">
+        <div class="single-ministry mb-100">
+          <img src="{{ projecto.imagem.url }} " alt="" />
+          <div class="ministry-content">
+            <h6>{{ projecto.titulo }}</h6>
+            <span class="mb-4">{{projecto.dataInicio|date}}</span>
+            <p>
+              {{projecto.conteudo|slice:210}} 
+              {% if projecto.conteudo|length > 210 %}...{% endif %}
+            </p>
+        <div class="button-container ministry-btn">
+            <a class="btn-solid-reg page-scroll" href="{% url 'webapp:projecto-details' projecto.id %}">Ver mais</a>
+         </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %} {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock content %}

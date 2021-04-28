@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+        <!-- Barra de navegação -->
+         <!--<nav class="navbar navbar-dark bg-dark">
+          <a class="navbar-brand" href="#">
+            <img src="../static/img/stepLogo.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+              Step
+          </a>
+
+        </nav>-->
+        <nav class="navbar navbar-dark bg-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+              <img src="../static/img/stepLogo.png" width="50" height="50" class="d-inline-block align-top" alt="" loading="lazy"alt="" width="30" height="24" class="d-inline-block align-text-top">
+              STEP
+            </a>
+
+          </div>
+        </nav>
+        <main >
+          <br><br><br><br><br>
+          <header class="masthead" >
+
+
+            <div class="container d-flex h-100 align-items-center">
+
+                <div class="mx-auto text-center">´
+
+                    <h1 class="mx-auto my-0 text-uppercase">Sistema de controlo e gerenciamento de Projetos</h1>
+                    <h6 class="text-Blak-50 mx-auto mt-2 mb-5">Planeje, automatize e monitore todos os seus serviços de forma simples, flexível e gratificante.</h6>
+                    <a href="{{ url_for('users.login')}}"><button class="btn  btn-secondary">Entrar</button></a>
+
+                </div>
+            </div>
+        </header>
+        <br><br>
+        <div class="container-fluid bg-dark">
+            ...
+          </div>
+
+
+              <br> <br>
+              <div class="container text-center">
+
+             <div class="row">
+                <div class="col-sm-4">
+                  <div class="card text-center">
+                    <div class="card-body">
+                      <h5 class="card-title"><img src="../static/img/calendar_7_80px.png " alt=""></h5>
+
+                      <p class="card-text"> <h2>Entregue tudo com pontualidade</h2></p>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="card text-center">
+                    <div class="card-body">
+                      <h5 class="card-title"><img src="../static/img/combo_chart_80px.png" alt=""></h5>
+                      <p class="card-text"> <h2>acompanhe o seu desenvolvimento</h2></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="card text-center">
+                    <div class="card-body">
+                      <h5 class="card-title"><img src="../static/img/timer_100px.png" alt=""></h5>
+                      <p class="card-text"> <h2>Faça gestão em tempo real </h2></p>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br>
+
+            <br>
+            <div class="container text-center">
+              <h1>A melhor forma de organizar e gerenciar projetos!</h1>
+              <p>Com a facilidade de gerenciar projetos você será ainda mais pontual, organizado e produtivo.
+                Uma gestão de projetos eficiente alcança metas e objetivos com muito mais rapidez e garante resultados
+                mais assertivos dentro dos recursos estimados, a curto, médio e longo prazo. É a oportunidade do seu
+                negócio se destacar dos demais e sua organização ser impulsionada para o sucesso. Sua equipe faz muito
+                 mais com menos!</p>
+            </div>
+        </main>
+
+        <br><br>
+        <footer class="page-footer font-small stylish-color-dark pt-4" style="background-color:#333333;">
+
+          <!-- Footer Links -->
+          <div class="container text-center text-md-left">
+
+
+            <div class="row">
+
+              <div class="col-md-4 mx-auto">
+
+                <h5 class="font-weight-bold text-uppercase mt-3 mb-4  text-white" ><img src="../static/img/stepLogo.png"> Step</h5>
+                <p class=" text-white">A  Step ajuda os projetos a serem mais eficientes, produtivas e organizadas</p>
+
+              </div>
+
+              <hr class="clearfix w-100 d-md-none">
+
+              <div class="col-md-2 mx-auto">
+        <br><br>
+
+
+              </div>
+
+            </div>
+
+
+          </div>
+
+
+
+            <div class="col-md-6 col-lg-10 text-center text-md-right">
+             <h6 class="mb-0 text-md-left text-white">© 2020</h6>
+              <!-- Facebook -->
+              <a class="fb-ic">
+                <i href="#!"> <img src="../static/img/facebook_old_50px.png" alt=""> </i>
+              </a>
+              <!-- Twitter -->
+              <a class="fb-ic">
+                <i href="#!"> <img src="../static/img/twitter_50px.png" alt=""> </i>
+              </a>
+              <!--Linkedin -->
+              <a class="fb-ic">
+                <i href="#!"> <img src="../static/img/linkedin_50px.png" alt=""> </i>
+              </a>
+              <!--Instagram-->
+              <a class="fb-ic">
+                <i href="#!"> <img src="../static/img/instagram_old_50px.png" alt=""> </i>
+              </a>
+            </div>
+          </div>
+        </footer>
+
+
+    {% endblock content %}

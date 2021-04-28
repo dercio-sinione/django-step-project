@@ -1,0 +1,201 @@
+{% extends "users/base.html" %} {% load static %} {% block title %} - Listar
+Mensagens {%endblock title %} {% block content %}
+
+<div class="row">
+  <div class="col-lg-12">
+    <!--breadcrumbs start -->
+    <ul class="breadcrumb">
+      <li>
+        <a href="{% url 'users:dilide-admin' %}"
+          ><i class="fa fa-home"></i> Home</a
+        >
+      </li>
+      <li>
+        <a href="/"><i class="fa fa-globe"></i> Web Site</a>
+      </li>
+      <li>
+        <a href="{% url 'users:dashboard' %}"
+          ><i class="fa fa-dashboard"></i> Dashboard</a>
+      </li>
+      <li class="active"><i class="fa fa-list-ul"></i> Listar Mensagens</li>
+    </ul>
+    <!--breadcrumbs end -->
+  </div>
+
+  <div class="col-lg-12">
+    <!--tab nav start-->
+    <section class="panel general">
+      <header class="panel-heading tab-bg-dark-navy-blue">
+        <ul class="nav nav-tabs">
+          <li class="active">
+            <a data-toggle="tab" href="#listar">
+              <i class="fa fa-list-ol"></i>
+              Listar
+            </a>
+          </li>
+        </ul>
+      </header>
+
+      <div class="panel-body minimal">
+
+          <div class="mail-option">
+              <div class="chk-all">
+{#                    <div class="pull-left mail-checkbox">#}
+{#                      <input type="checkbox">#}
+{#                    </div>#}
+                    <div class="btn-group">
+                      <a class="btn mini all" href="#" data-toggle="dropdown">
+                        All
+{#                          <span class="label label-info">Lidas</span>#}
+                        <i class="fa fa-angle-down "></i>
+                        </a>
+                      <ul class="dropdown-menu">
+                        <li><a href="#"> Todas</a></li>
+                        <li><a href="#"> Lidas</a></li>
+                        <li><a href="#"> Não Lidas</a></li>
+                      </ul>
+                    </div>
+              </div>
+              <div class="btn-group">
+                <a class="btn mini tooltips" href="#" data-original-title="Refresh" data-toggle="dropdown" data-placement="top">
+                  <i class=" fa fa-refresh"></i>
+                  </a>
+              </div>
+              <div class="btn-group hidden-phone">
+                    <a class="btn mini blue" href="#" data-toggle="dropdown">
+                      More
+                      <i class="fa fa-angle-down "></i>
+                      </a>
+                    <ul class="dropdown-menu">
+                      <li><a href="#"><i class="fa fa-envelope-open-o"></i> Marcar como Lida</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#"><i class="fa fa-trash-o"></i> Eliminar</a></li>
+                    </ul>
+                  </div>
+              <div class="btn-group">
+                    <a class="btn mini tooltips" style="cursor: default" data-placement="top">
+                      <i class="fa fa-envelope-open"></i>
+                        Mensagens Lidas
+                      </a>
+                  </div>
+
+                  <ul class="unstyled inbox-pagination">
+
+                      <li><span>1-1 de {{ mensagens.count }}</span></li>
+                    <li>
+                      <a class="np-btn" href="#"><i class="fa fa-angle-left  pagination-left"></i></a>
+                    </li>
+                    <li>
+                      <a class="np-btn" href="#"><i class="fa fa-angle-right pagination-right"></i></a>
+                    </li>
+                  </ul>
+                </div>
+            <!--******************* START SHOW ALERT **************************** -->
+            {% include "users/alerts.html" %}
+            <!--******************* END SHOW ALERT **************************** -->
+          <div class="table-inbox-wrap ">
+                  <table class="table table-inbox table-hover">
+                    <tbody>
+                        {% if mensagens %}
+                            {% for mensagen in mensagens %}
+                                {% if not mensagen.lida %}
+                                    <tr class="unread">
+                                {% else %}
+                                    <tr>
+                                {% endif %}
+                                <td class="inbox-small-cells">
+                                  <input class="mail-checkbox" name="selected" type="checkbox">
+                                </td>
+                                <td class="inbox-small-cells">
+                                    <i class="fa
+                                    {% if not mensagen.lida %}
+                                        fa-star
+                                    {% else %}
+                                        fa-star-o
+                                    {% endif %}
+                                 inbox-started"></i></td>
+                                <td class="view-message dont-show">
+                                    <a href="{% url 'users:mensagemDetail' mensagen.pk %}">
+                                        {{ mensagen.nome }}
+                                        <span class="label label-info pull-right">{{ mensagen.interesse.nome }}</span>
+                                    </a>
+                                </td>
+                                <td class="view-message"><a href="{% url 'users:mensagemDetail' mensagen.pk %}">{{ mensagen.assunto }}</a></td>
+                                <td class="view-message inbox-small-cells"></td>
+                                <td class="view-message text-right">{{ mensagen.dataCriacao|date }}</td>
+                                <td>
+                                    <!-- Eliminar -->
+                            <a
+                              onclick="fnIdselecionado('mensagem/{{mensagen.pk}}/delete', 'Mensagem de: {{mensagen.nome}}')"
+                              data-toggle="modal"
+                              data-target="#modalEliminar"
+                              ><button class="btn btn-default btn-xs tooltips" data-original-title="Eliminar" data-toggle="tooltip" data-placement="top">
+                                <i class="fa fa-trash"></i></button>
+                            </a>
+
+                            <!-- Detalhes -->
+                            <a
+                              href="{% url 'users:mensagemDetail' mensagen.pk %}"
+                              data-toggle="modal"
+                              data-target="#ModalInformacao">
+                                <button class="btn btn-default btn-xs tooltips" data-original-title="Detalhes" data-toggle="tooltip" data-placement="top">
+                                <i class="fa fa-info"></i></button
+                            ></a>
+                                </td>
+                        </tr>
+                            {% endfor %}
+                        {% endif %}
+                    </tbody>
+                  </table>
+                </div>
+
+      </div>
+    </section>
+    <!--tab nav end-->
+
+   <!-- ************************* START MODAL ************************* -->
+  <div
+    class="modal fade"
+    id="modalEliminar"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myModalLabel"
+    aria-hidden="true"
+    style="display: none"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-hidden="true"
+          >
+            ×
+          </button>
+          <h4 class="modal-title">Atenção</h4>
+        </div>
+        <div class="modal-body">
+          <h3>Tens a certeza?</h3>
+          <p>Tem certeza de que deseja eliminar o registo selecionado?</p>
+          <strong id="selected"></strong>
+        </div>
+        <div class="modal-footer">
+          <button data-dismiss="modal" class="btn btn-default" type="button">
+            Cancelar
+          </button>
+          <a href="#" id="btnConfirm">
+            <button class="btn btn-danger" type="submit">
+              Sim, tenho certeza
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ************************* END MODAL ************************* -->
+
+  </div>
+</div>
+{% endblock content %}

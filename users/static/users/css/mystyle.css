@@ -1,0 +1,21 @@
+.large {
+  font-size: 30px;
+}
+
+.panel-projectos {
+  background-color: #5cb85c;
+}
+
+.panel-actividades {
+  background-color: #f0ad4e;
+}
+
+.panel-sevicos {
+  background-color: #f05050;
+}
+
+.panel-actividades,
+.panel-sevicos,
+.panel-projectos {
+  color: white;
+}

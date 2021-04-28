@@ -1,0 +1,90 @@
+{% extends "users/base.html" %} {% load static %} {% block title %} - Atualizar
+Endereço {%endblock title %} {% block content %} {% load crispy_forms_tags %}
+
+<div class="row">
+  <div class="col-lg-12">
+    <!--breadcrumbs start -->
+    <ul class="breadcrumb">
+      <li>
+        <a href="{% url 'users:dilide-admin' %}"
+          ><i class="fa fa-home"></i> Home</a
+        >
+      </li>
+      <li>
+        <a href="/"><i class="fa fa-globe"></i> Web Site</a>
+      </li>
+      <li>
+        <a href="{% url 'users:dashboard' %}"><i class="fa fa-dashboard"></i> Dashboard</a>
+      </li>
+      <li>
+        <a href="{% url 'users:listarSobre' %}"><i class="fa fa-list"></i> Ver Sobre</a>
+      </li>
+      <li class="active"><i class="fa fa-info-circle"></i> Sobre</li>
+    </ul>
+    <!--breadcrumbs end -->
+  </div>
+
+  <div class="col-lg-12">
+    <!--tab nav start-->
+    <section class="panel general">
+      <header class="panel-heading tab-bg-dark-navy-blue">
+        <ul class="nav nav-tabs">
+          <li class="active">
+            <a data-toggle="tab" href="#atualizar">
+              <i class="fa fa-info"></i>
+              Sobre
+            </a>
+          </li>
+        </ul>
+      </header>
+      <div class="panel-body">
+        <div class="tab-content">
+          <div id="atualizar" class="tab-pane active">
+            <!-- *********************** FORM ADD *********************************************** -->
+            <div class="row">
+              <!-- ****************************** START ERROR ALERT ****************************** -->
+              <div class="col-lg-12">
+                {% if form.errors %}
+                <div class="alert alert-danger alert-dismissable">
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="alert"
+                    aria-hidden="true"
+                  >
+                    ×
+                  </button>
+                  <i class="fa fa-info-circle"></i> {{form.errors}}
+                </div>
+                {% endif %}
+              </div>
+              <!-- ****************************** END ERROR ALERT ****************************** -->
+
+              <div class="col-lg-8">
+                <section class="panel">
+                  <div class="panel-body">
+                    <!-- ************** START FORM *********************** -->
+                    <form
+                      role="form"
+                      method="POST"
+                      enctype="multipart/form-data"
+                    >
+                      {% csrf_token %}
+                      {{form|crispy}}
+                      <button type="submit" class="btn btn-info">Guardar</button>
+                    </form>
+                    <!-- ************** END FORM *********************** -->
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--tab nav end-->
+  </div>
+
+
+</div>
+{% endblock content %}

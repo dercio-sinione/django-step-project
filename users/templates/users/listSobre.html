@@ -1,0 +1,159 @@
+{% extends "users/base.html" %} {% load static %} {% block title %} - Sobre {%endblock title %} {% block content %}
+
+<div class="row">
+  <div class="col-lg-12">
+    <!--breadcrumbs start -->
+    <ul class="breadcrumb">
+      <li>
+        <a href="{% url 'users:dilide-admin' %}"
+          ><i class="fa fa-home"></i> Home</a
+        >
+      </li>
+      <li>
+        <a href="/"><i class="fa fa-globe"></i> Web Site</a>
+      </li>
+      <li>
+        <a href="{% url 'users:dashboard' %}"
+          ><i class="fa fa-dashboard"></i> Dashboard</a
+        >
+      </li>
+      <li>
+        <a href="{% url 'users:addSobre' %}"
+          ><i class="fa fa-plus"></i> Adicionar Sobre</a>
+      </li>
+      <li class="active"><i class="fa fa-info-circle"></i> Sobre</li>
+    </ul>
+    <!--breadcrumbs end -->
+  </div>
+
+  <div class="col-lg-12">
+    <!--tab nav start-->
+    <section class="panel general">
+      <header class="panel-heading tab-bg-dark-navy-blue">
+        <ul class="nav nav-tabs">
+          <li class="active">
+            <a data-toggle="tab" href="#listar">
+              <i class="fa fa-list-ol"></i>
+              Listar
+            </a>
+          </li>
+        </ul>
+      </header>
+      <div class="panel-body">
+        <div class="tab-content">
+          <div id="listar" class="tab-pane active">
+            <div class="row">
+              <div class="col-lg-12">
+                <!--******************* START SHOW ALERT **************************** -->
+                {% include "users/alerts.html" %}
+                <!--******************* END SHOW ALERT **************************** -->
+              </div>
+
+              <div class="col-md-12">
+                <section class="panel">
+                  <div class="panel-body table-responsive">
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Título</th>
+                          <th>Atualização</th>
+                          <th>Criação</th>
+                          <th>Usuário</th>
+                          <th>Ações</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% if all_sobre %} {% for sobre in all_sobre %}
+                        <tr>
+                          <td>{{ sobre.pk }}</td>
+                          <td>{{ sobre.titulo }}</td>
+                          <td>
+                            {{sobre.dataAtualizacao|date:"SHORT_DATE_FORMAT"}}
+                          </td>
+                          <td>
+                            {{ sobre.dataCriacao|date:"SHORT_DATE_FORMAT" }}
+                          </td>
+                          <td>{{ sobre.criadoPor.username }}</td>
+                          <td>
+                            <!-- Editar -->
+                            <a
+                              href="{% url 'users:editarSobre' sobre.pk %}"
+                              ><button class="btn btn-default btn-xs">
+                                <i class="fa fa-pencil"></i></button></a>
+                            <!-- Eliminar -->
+                            <a
+                              onclick="fnIdselecionado('/sobre/{{sobre.pk}}/delete', 'Sobre: {{sobre.titulo}}')"
+                              data-toggle="modal"
+                              data-target="#modalEliminar">
+                              <button class="btn btn-default btn-xs">
+                              <i class="fa fa-times"></i></button>
+                            </a>
+
+                            <!-- Detalhes -->
+                            <a href="{% url 'users:editarSobre' sobre.pk %}">
+                              <button class="btn btn-default btn-xs">
+                              <i class="fa fa-info"></i></button>
+                            </a>
+                          </td>
+                        </tr>
+                        {% endfor %} {% endif %}
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--tab nav end-->
+  </div>
+
+
+  <!-- ************************* START MODAL ************************* -->
+  <div
+    class="modal fade"
+    id="modalEliminar"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myModalLabel"
+    aria-hidden="true"
+    style="display: none"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-hidden="true"
+          >
+            ×
+          </button>
+          <h4 class="modal-title">Atenção</h4>
+        </div>
+        <div class="modal-body">
+          <h3>Tens a certeza?</h3>
+          <p>Tem certeza de que deseja eliminar o registo selecionado?</p>
+          <strong id="selected"></strong>
+        </div>
+        <div class="modal-footer">
+          <button data-dismiss="modal" class="btn btn-default" type="button">
+            Cancelar
+          </button>
+          <a href="#" id="btnConfirm">
+            <button class="btn btn-danger" type="submit">
+              Sim, tenho certeza
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ************************* END MODAL ************************* -->
+
+  {% endblock content %}
+</div>

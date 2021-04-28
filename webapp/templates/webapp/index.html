@@ -1,0 +1,97 @@
+{% extends 'webapp/base.html' %} {% block content %}
+{% include 'webapp/slide.html' %}
+<div class="faith-blog-area section-padding-100-0">
+  
+  <div class="container">
+     {% comment %} PROJECTOS DESCRIPTION {% endcomment %}
+    <div class="row">
+      <div class="col-12">
+        <div class="section-heading text-center mx-auto">
+          <h3>Projectos</h3>
+          {% if projectoSubtitulo %}
+          <p>{{ projectoSubtitulo }}</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    {% comment %} PROJECTOS CONTENT  {% endcomment %}
+    <div class="row">
+      
+    {% comment %} PROJECTOS CONTENT  {% endcomment %}
+            {% if projectos %}
+                {% for projecto in projectos %}
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <div class="single-ministry mb-100">
+                            <img src="{{ projecto.imagem.url }}" alt="">
+                            <div class="ministry-content">
+                                <h6>{{ projecto.titulo }}</h6>
+                                <span class="mb-4">{{projecto.dataInicio|date}}</span>
+                                <p>
+                                    {{projecto.conteudo|slice:210}}
+                                    {% if projecto.conteudo|length > 210 %}...{% endif %}
+                                </p>
+                                <div class="button-container ministry-btn">
+                                    <a class="btn-solid-reg page-scroll" href="{% url 'webapp:projecto-details' projecto.id %}">Ver mais</a>
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            
+ {% comment %} INICIO DAS ATIVIDADES 
+{% endcomment %}
+
+
+   <!-- Actividades -->
+    <div id="services" class="cards-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title"></div>
+                            <h2>Actividades</h2>
+                        {% if actividadeSubtitulo %}
+                             <p class="p-heading">{{ actividadeSubtitulo }}</p>
+                         {% endif %}
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+            <div class="row">
+                <div class="col-lg-12">
+
+                      {% if actividades %}
+                         {% for actividade in actividades %}
+
+                    <!-- Card -->
+                    <div class="card">
+                        <div class="card-image">
+                            <img class="img-fluid" src="{{ actividade.imagem.url }}" alt="alternative">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title">{{actividade.titulo}}</h3>
+                            <p>
+                                {{actividade.conteudo|slice:210}}
+                                 {% if actividade.conteudo|length > 200 %}...{% endif %}
+                            </p>
+                        </div>
+                        <div class="button-container">
+                            <a class="btn-solid-reg page-scroll" href="{% url 'webapp:actividades-details' actividade.id %}">Ver mais</a>
+                        </div> <!-- end of button-container -->
+                    </div>
+                    <!-- end of card -->
+
+                     {% endfor %}
+                 {% endif %}
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of cards-2 -->
+    <!-- end of services -->
+
+    </div>
+
+  </div>
+
+</div>
+
+{% endblock content %}

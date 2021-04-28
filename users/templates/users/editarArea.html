@@ -1,0 +1,91 @@
+{% extends "users/base.html" %} {% load static %} {% block title %} - Editar
+Área {%endblock title %} {% block content %}
+
+<div class="row">
+  <div class="col-lg-12">
+    <!--breadcrumbs start -->
+    <ul class="breadcrumb">
+      <li>
+        <a href="{% url 'users:dilide-admin' %}"
+          ><i class="fa fa-home"></i> Home</a
+        >
+      </li>
+      <li>
+        <a href="/"><i class="fa fa-globe"></i> Web Site</a>
+      </li>
+      <li>
+        <a href="{% url 'users:dashboard' %}"
+          ><i class="fa fa-dashboard"></i> Dashboard</a
+        >
+      </li>
+      <li>
+        <a href="{% url 'users:listarareas' %}">
+          <i class="fa fa-list-ol"></i> Listar Áreas</a
+        >
+      </li>
+      <li class="active"><i class="fa fa-pencil"></i> Editar Área</li>
+    </ul>
+    <!--breadcrumbs end -->
+  </div>
+
+  <div class="col-lg-12">
+    <!--tab nav start-->
+    <section class="panel general">
+      <header class="panel-heading tab-bg-dark-navy-blue">
+        <ul class="nav nav-tabs">
+          <li class="active">
+            <a data-toggle="tab" href="#editar">
+              <i class="fa fa-pencil"></i>
+              Editar
+            </a>
+          </li>
+        </ul>
+      </header>
+      <div class="panel-body">
+        <div class="tab-content">
+          <div id="editar" class="tab-pane active">
+            <!-- *********************** FORM ADD *********************************************** -->
+            <div class="row">
+              <div class="col-lg-12">
+                <!--******************* START SHOW ALERT **************************** -->
+                {% include "users/alerts.html" %}
+                <!--******************* END SHOW ALERT **************************** -->
+              </div>
+              <div class="col-lg-8">
+                <section class="panel">
+                  <div class="panel-body">
+                    <!-- ************** START FORM *********************** -->
+                    <form role="form" method="POST">
+                      {% csrf_token %}
+                      <div class="form-group">
+                        <label for="name">Nome</label>
+                        <input
+                          type="text"
+                          name="nome"
+                          class="form-control"
+                          id="name"
+                          value="{{form.nome}}"
+                          placeholder="Nome"
+                          required
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="subtitulo">Subtítulo</label>
+                        <textarea class="form-control" name="subtitulo" id="subtitulo" cols="30" rows="8">{{form.subtitulo}}</textarea>
+                      </div>
+                      <button type="submit" class="btn btn-primary">
+                        Actualizar
+                      </button>
+                    </form>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--tab nav end-->
+  </div>
+</div>
+{% endblock content %}
