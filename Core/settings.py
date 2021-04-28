@@ -41,8 +41,9 @@ INSTALLED_APPS = [
 
     'crispy_forms',
 
-    'webapp.apps.WebappConfig',
-    'users.apps.usersConfig',
+    # 'webapp.apps.WebappConfig',
+    # 'users.apps.usersConfig',
+    'step.apps.stepConfig'
 ]
 
 MIDDLEWARE = [
@@ -68,8 +69,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'users.context_processors.show_mensagens',
-                'webapp.context_processors.all_services'
+                # 'users.context_processors.show_mensagens',
+                # 'webapp.context_processors.all_services'
             ],
         },
     },
