@@ -1,6 +1,5 @@
 from django.contrib import admin
-# from .models import (Actividades, Areas, Projectos, Servicos,
-#                      ServicosDetalhes, Slides, Sobre, ActividadesLink, Mensagens)
+from .models import (Categorias)
 
 
-# admin.site.register(Actividades)
+admin.site.register(Categorias)
