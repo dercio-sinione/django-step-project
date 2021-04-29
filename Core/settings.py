@@ -129,9 +129,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # # Configuração da rota de redirecionamento para as views que é necessário efectuar o login para acessar
-LOGIN_REDIRECT_URL = 'step:dasboard'
 LOGIN_URL = 'step:login'
-
+LOGIN_REDIRECT_URL = 'step:dasboard'
 LOGOUT_REDIRECT_URL = 'step:index'
 
 
@@ -142,8 +141,3 @@ MEDIA_URL = '/media/'
 
 # Configuração de estilização para os formulários genericos do Django
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
-# Configuração da rota de redirecionamento para as views que é necessário efectuar o login para acessar
-LOGIN_REDIRECT_URL = 'step:dasboard'
-LOGIN_URL = 'step:login'
-# LOGOUT_REDIRECT_URL = 'blog:login'
