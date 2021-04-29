@@ -1,7 +1,9 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+
 from step.models import Notificacoes
 
-
+@login_required
 def dasboard(request):
     # idUser = current_user.id
     # pr_parados = Projectos.query.filter_by(idUsuario=idUser,estado="parado").count()
