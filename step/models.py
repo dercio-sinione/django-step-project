@@ -27,8 +27,8 @@ class Categorias(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
-    # def __str__(self) -> str:
-    #     return f'self.nome - self.user.username'
+    def __str__(self):
+        return f'{self.nome}'
 
 class Entidades(models.Model):
     nome = models.CharField(max_length=100, null=False)
@@ -36,17 +36,17 @@ class Entidades(models.Model):
     contacto = models.CharField(max_length=50, null=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    # def __str__(self) -> str:
-    #     return f'self.nome - self.user.username'
-
-
+    def __str__(self):
+        return f'{self.nome}'
+    
 class Projectos(models.Model):
+    ops = [('1', 'Parado'),('2', 'Concluído'), ('3', 'Em produção')]
     categoria = models.ForeignKey(Categorias, on_delete=models.CASCADE)
     descricao = models.CharField(max_length=100, default=None)
     custos = models.IntegerField(default='0')
     dataEntrega = models.DateField(default=None, null=True)
     dataRegisto = models.DateTimeField(auto_now=True)
-    estado = models.CharField(max_length=100, null=False, default='prado')
+    estado = models.CharField(max_length=100, null=False, default='prado', choices=ops)
     progresso = models.IntegerField(default='0')
     dataConclusao = models.DateField(default=None, null=True)
     entidade = models.ForeignKey(Entidades, on_delete=models.CASCADE)

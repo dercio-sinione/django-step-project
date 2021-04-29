@@ -1,5 +1,5 @@
-{% extends 'step/baseAdmin.html' %} {% load static %} {% block content %}
-
+{% extends 'step/baseAdmin.html' %} {% load static %} {% block content %} 
+{% load crispy_forms_tags %}
 <div class="row">
   <div class="col-md-12">
     <!--breadcrumbs start -->
@@ -22,10 +22,9 @@
           method="POST"
           action="{% url 'step:addprojecto' %}"
         >
-          {% csrf_token %}
-
+          {% csrf_token %} {{form|crispy}}
           <!-- Id da categoria -->
-          <div class="form-group hidden">
+          <!-- <div class="form-group hidden">
             <input
               type="text"
               name="idCategoria"
@@ -34,10 +33,10 @@
               placeholder="Nome"
               readonly
             />
-          </div>
+          </div> -->
 
           <!-- Categoria -->
-          <div class="form-group">
+          <!-- <div class="form-group">
             <input
               type="text"
               name="categoria"
@@ -46,10 +45,10 @@
               placeholder="Nome"
               readonly
             />
-          </div>
+          </div> -->
 
           <!-- Descrição -->
-          <div class="form-group">
+          <!-- <div class="form-group">
             <input
               type="text"
               name="descricao"
@@ -58,10 +57,10 @@
               placeholder="Nome"
               readonly
             />
-          </div>
+          </div> -->
 
           <!-- custos -->
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="">Custos</label>
             <input
               type="number"
@@ -71,20 +70,20 @@
               placeholder="Custos"
               autocomplete="off"
             />
-          </div>
+          </div> -->
 
           <!-- Estado -->
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="selectestado">Estado</label>
             <select class="form-control m-b-10" name="estado" id="selectestado">
               <option value="parado">parado</option>
               <option value="em produção">em produção</option>
               <option value="concluído">concluído</option>
             </select>
-          </div>
+          </div> -->
 
           <!-- Progresso -->
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="">Progresso</label>
             <input
               type="number"
@@ -95,16 +94,17 @@
               placeholder="Progresso"
               autocomplete="off"
             />
-          </div>
+          </div> -->
 
           <!-- Id da Entidade -->
-          <div class="form-group hidden">
+          <!-- <div class="form-group hidden"> -->
+          <div class="form-group">
             <input
               type="text"
               name="idEntidade"
               class="form-control"
-              value=""
-              placeholder="Nome"
+              value="{{entidade.pk}}"
+              placeholder="Id Entidade"
               readonly
             />
           </div>
@@ -115,13 +115,14 @@
               type="text"
               name="entidade"
               class="form-control"
-              value=""
-              placeholder="Nome"
+              value="{{entidade}}"
+              placeholder="Entidade"
+              readonly
             />
           </div>
 
           <!-- Data de entrega -->
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="dataEntrega">Data de Entrega</label>
 
             <input
@@ -132,7 +133,7 @@
               id="dataEntrega"
               placeholder="Data de Entrega"
             />
-          </div>
+          </div> -->
 
           <div class="form-group">
             <button type="submit" class="btn btn-primary">Adicionar</button>
@@ -142,189 +143,7 @@
     </section>
   </div>
 
-  <div class="col-md-5">
-    <section class="panel tasks-widget">
-      <header class="panel-heading">Selecionar Categoria</header>
-      <div class="panel-body">
-        <div class="task-content">
-          <ul class="task-list ui-sortable" id="listaCategorias">
-            {% if result %} {% for item in result.items %}
-            <li>
-              <span> {{ item.nome }}</span>
-              <div class="pull-right hidden-phone">
-                <a onclick="SelectCategoria('{{item.id}}','{{item.nome}}')"
-                  ><button class="btn btn-default btn-xs">
-                    <i class="fa fa-check"></i></button
-                ></a>
-                <a
-                  onclick="AcaoCategoria('/categoria/{{item.id}}/update','Actualizar','{{item.nome}}')"
-                  href="#ModalCategoria"
-                  data-toggle="modal"
-                  data-target="#ModalCategoria"
-                  ><button class="btn btn-default btn-xs">
-                    <i class="fa fa-pencil"></i></button
-                ></a>
-                <a
-                  href="#ModalConfirm"
-                  onclick="fnIdselecionado('/categoria/{{item.id}}/delete?en={{en}}&page={{curpage}}')"
-                  data-toggle="modal"
-                  data-target="#ModalConfirm"
-                  ><button class="btn btn-default btn-xs">
-                    <i class="fa fa-times"></i></button
-                ></a>
-              </div>
-            </li>
-            {% endfor %} {% endif %}
-          </ul>
-        </div>
-        <div class="row">
-          <div class="col-md-3">
-            <a
-              onclick="AcaoCategoria('/addCategoria/','Adicionar',null)"
-              class="btn btn-info btn-sm pull-left"
-              href="#ModalCategoria"
-              data-toggle="modal"
-              >Add Categoria</a
-            >
-          </div>
-          {% comment %} Paginacao {% endcomment %}
-          <!-- Paginação -->
-          {% comment %}
-          <div class="col-md-9 text-right">
-            <ul class="pagination" style="margin-top: 0px; margin-bottom: 0px">
-              <li><a href="#">«</a></li>
-              {% for numPage in
-              result.iter_pages(left_edge=1,right_edge=1,left_current=1,right_current=2)%}
-              {% if numPage %} {% if result.page == numPage %}
-              <li>
-                <a
-                  style="background-color: #ccc"
-                  href="/projectos/add?en={{en}}&page={{numPage}}"
-                  >{{ numPage }}</a
-                >
-              </li>
-              {% else %}
-              <li>
-                <a href="/projectos/add?en={{en}}&page={{numPage}}"
-                  >{{ numPage }}</a
-                >
-              </li>
-              {% endif %} {% endif %} {% endfor %}
-              <li><a href="#">»</a></li>
-            </ul>
-          </div>
-          {% endcomment %}
-        </div>
-      </div>
-    </section>
-  </div>
-</section>
 
-<!-- Modal -->
-<section class="">
-  <!-- Add Categoria -->
-  <div
-    class="modal fade"
-    id="ModalCategoria"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="myModalLabel"
-    aria-hidden="true"
-  >
-    <div
-      class="modal-dialog modal-sm"
-      style="display: flex; justify-content: center"
-    >
-      <div class="modal-content col-md-8">
-        <div class="modal-header">
-          <button
-            type="button"
-            class="close"
-            data-dismiss="modal"
-            aria-hidden="true"
-          >
-            ×
-          </button>
-          <h4 class="modal-title">Categorias</h4>
-        </div>
-        <div class="modal-body">
-          <div class="panel-body">
-            <!-- Formulario Add Categoria -->
-            <form role="form" id="formCategoria" method="POST">
-              {% csrf_token %}
-              <div class="form-group">
-                <div id="caixa" class="alert">
-                  <i
-                    id="closeAlert"
-                    class="fa fa-times float-right"
-                    style="cursor: pointer"
-                  ></i>
-                  <p id="CaixaMsg"></p>
-                </div>
-                <label for="txtcategoria">Categoria</label>
-                <input
-                  type="text"
-                  required
-                  minlength="3"
-                  maxlength="20"
-                  class="form-control"
-                  id="txtcategoria"
-                  name="nome"
-                  placeholder="Categoria"
-                  autocomplete="off"
-                />
-              </div>
-              <button id="btnSendCategoria" class="btn btn-primary">
-                Adicionar
-              </button>
-            </form>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button data-dismiss="modal" class="btn btn-default" type="button">
-            Close
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ModalConfirm -->
-  <div
-    class="modal fade"
-    id="ModalConfirm"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="myModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-sm" style="display: flex">
-      <div
-        class="modal-content col-md-8"
-        style="margin-left: 20%; margin-top: 10%"
-      >
-        <div class="modal-header">
-          <button
-            type="button"
-            class="close"
-            data-dismiss="modal"
-            aria-hidden="true"
-          >
-            ×
-          </button>
-          <h4 class="modal-title">Atenção</h4>
-        </div>
-        <div class="modal-body">
-          Estás prestes a eliminar esta categoria, desejas continuar com a
-          operação?
-        </div>
-        <div class="modal-footer">
-          <a class="btn btn-danger" id="btnConfirm">Sim</a>
-          <button data-dismiss="modal" class="btn btn-default">Não</button>
-        </div>
-      </div>
-    </div>
-  </div>
 </section>
 
 {% block individualScript %}

@@ -1,15 +1,15 @@
 from django.contrib import messages
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django import forms
 
-from step.models import Projectos
+from step.models import Entidades, Projectos, Categorias
 
 class FormProjecto(forms.ModelForm):
     class Meta:
         model = Projectos
         fields = ['categoria', 'descricao', 'custos', 'dataEntrega', 'estado',
-                  'progresso', 'entidade']
+                  'progresso', ]
 
         widgets = {
             'dataEntrega': forms.DateInput(attrs={
@@ -25,13 +25,23 @@ def projectos(request):
 
 @login_required
 def addProjecto(request):
-    print(request.GET)
+    entidade = None
+    if request.method== 'GET':
+        entidade = Entidades.objects.get(pk=request.GET['en'])
+        
+    categorias= Categorias.objects.all()
+    form = FormProjecto()
+    form.instance.entidade = entidade
+    
+
     if request.method == 'POST':
         # Formulario de registar Projectos
         form = FormProjecto(request.POST,)
         # form = FormProjecto(request.POST, request.FILES,)
         form.instance.user = request.user
-
+        entidade = Entidades.objects.get(pk=request.POST['idEntidade'])
+        form.instance.entidade = entidade
+        
         # Validar o formulario
         if form.is_valid():
             form.save()
@@ -42,9 +52,7 @@ def addProjecto(request):
         else:
             messages.error(
                 request, f'{form.errors}', extra_tags='danger')
-    else:
-        form = FormProjecto()
-    return render(request, 'step/addprojectos.html', {'form': form})
+    return render(request, 'step/addprojectos.html', {'form': form, 'categorias': categorias, 'entidade': entidade})
 
 
 # @login_required
