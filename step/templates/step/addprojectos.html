@@ -46,7 +46,6 @@
                     <div class="form-group">
                         <label for="">Custos</label>
                        <input type="number" class="form-control form-control is-invalid" value="{{form.custos.data}}" name="custos" placeholder="Custos" autocomplete="off">
-                     
                     </div>
 
                     <!-- Estado -->
@@ -77,12 +76,12 @@
 
                     <!-- Id da Entidade -->
                     <div class="form-group hidden">
-                        <input type="text" name="idEntidade" class="form-control" value="" placeholder="Nome" readonly />                     
+                        <input type="text" name="idEntidade" class="form-control" value="" placeholder="Nome" readonly />
                     </div>
 
                     <!-- Entidade -->
-                    <div class="form-group">                        
-                        <input type="text" name="entidade" class="form-control" value="" placeholder="Nome"  />                     
+                    <div class="form-group">
+                        <input type="text" name="entidade" class="form-control" value="" placeholder="Nome"  />
                     </div>
 
                     <!-- Data de entrega -->
@@ -90,13 +89,15 @@
                         <label for="dataEntrega">Data de Entrega</label>
 
                         <input type="date" value="{{form.dataEntrega.data}}" name="dataEntrega"  class="form-control form-control is-invalid" id="dataEntrega" placeholder="Data de Entrega">
-                         
+
                       </div>
-                      
+
                     </div>
 
                     <div class="form-group">
-                        {{ form.submit(class="btn btn-primary")}}
+                      <button type="submit" class="btn btn-primary" >
+                       Adicionar
+                      </button>
                     </div>
                 </form>
             </div>
@@ -113,7 +114,7 @@
 
         <div class="task-content">
             <ul class="task-list ui-sortable" id="listaCategorias">
-            {% if result: %}
+            {% if result %}
                 {% for item in result.items %}
                     <li>
                         <span> {{ item.nome }}</span>
@@ -131,8 +132,10 @@
                 <div class="col-md-3">
                 <a onclick="AcaoCategoria('/categoria','Adicionar',null)" class="btn btn-info btn-sm pull-left" href="#ModalCategoria" data-toggle="modal">Add Categoria</a>
                 </div>
+
+
                 <!-- Paginação -->
-                <div class="col-md-9 text-right">
+                {% comment %} <div class="col-md-9 text-right">
                     <ul class="pagination" style="margin-top: 0px; margin-bottom: 0px;">
                         <li><a href="#">«</a></li>
                     {% for numPage in result.iter_pages(left_edge=1,right_edge=1,left_current=1,right_current=2)%}
@@ -146,7 +149,8 @@
                     {% endfor %}
                         <li><a href="#">»</a></li>
                     </ul>
-                </div>
+                </div> {% endcomment %}
+
             </div>
 </section>
 </div>
@@ -209,7 +213,7 @@
 
 
 {% block individualScript %}
-<script src="../static/js/step/projectos.js"></script>
+<script src="{% static 'step/js/step/projectos.js' %}"></script>
 {% endblock individualScript %}
 
 {% endblock content %}
