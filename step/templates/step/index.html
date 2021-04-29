@@ -1,6 +1,5 @@
-{% extends 'step/base.html' %}
+{% extends 'step/baseHome.html' %}
 {% load static %}
-
 
 {% block content %}
 
@@ -32,7 +31,7 @@
 
                     <h1 class="mx-auto my-0 text-uppercase">Sistema de controlo e gerenciamento de Projetos</h1>
                     <h6 class="text-Blak-50 mx-auto mt-2 mb-5">Planeje, automatize e monitore todos os seus serviços de forma simples, flexível e gratificante.</h6>
-                    <a href="#"><button class="btn  btn-secondary">Entrar</button></a>
+                    <a href="{% url 'step:dasboard' %}"><button class="btn  btn-secondary">Entrar</button></a>
 
                 </div>
             </div>

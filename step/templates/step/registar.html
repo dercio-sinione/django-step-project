@@ -1,0 +1,89 @@
+{% extends 'step/baseHome.html' %}
+{% load static %}
+
+{% block content %}
+
+    <nav class="navbar nav-login">
+        <a href="{% url 'step:index' %}">Step Admin</a>
+    </nav>
+
+    <br> <br> <br>
+    
+    <div class="caixa-login">
+        <div class="col-md-3 subcaixa">
+        <!-- formulário de criação de conta -->
+        <form method="POST" action="">
+            {% csrf_token %}
+
+            <fieldset class="form-group">
+            <br>
+                <div class="form-group caixaUser">
+                    <div>
+                        <i class="fa fa-user"></i>
+                    </div>
+                </div>
+
+            <!-- ****************************** START ERROR ALERT ****************************** -->
+            {% if form.errors %}
+            <div class="alert alert-danger alert-dismissable">
+                <button
+                type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-hidden="true"
+                >
+                ×
+                </button>
+                <i class="fa fa-info-circle"></i> {{form.errors}}
+            </div>
+            {% endif %}
+          <!-- ****************************** END ERROR ALERT ****************************** -->
+
+
+            <div class="login-wrap">
+            <input
+            type="text"
+            name="username"
+            class="form-control"
+            placeholder="Usuário"
+            autofocus
+            />
+            <br />
+            <input
+            type="email"
+            name="email"
+            class="form-control"
+            placeholder="email"
+            autofocus
+            />
+            <br />
+            <input
+            type="password"
+            name="password"
+            class="form-control"
+            placeholder="Password"
+            />
+            <br />
+            <input
+            type="password"
+            name="password2"
+            class="form-control"
+            placeholder="Confirmar"
+            />
+            <label class="checkbox">
+            <span class="pull-right"> </span>
+            </label>
+            <button class="btn btn-primary btn-block" type="submit">
+            Registar-se
+            </button>
+        </div>
+            
+                
+                <!-- Link para registar-se -->
+                <small class="text-muted ml-2"> <a href="#">Entrar</a> </small>
+
+            </fieldset>
+        </form>
+        </div>
+    </div>
+{% endblock content %}

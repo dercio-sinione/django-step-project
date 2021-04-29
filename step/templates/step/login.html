@@ -1,0 +1,84 @@
+{% extends 'step/baseHome.html' %}
+{% load static %}
+
+{% block content %}
+
+    <nav class="navbar nav-login">
+        <a href="{% url 'step:index' %}">Step Admin</a>
+    </nav>
+
+    <br> <br> <br>
+    
+    <div class="caixa-login">
+        <div class="col-md-3 subcaixa">
+        <!-- formulário de criação de conta -->
+        <form method="POST" action="">
+            {% csrf_token %}
+
+            <fieldset class="form-group">
+            <br>
+                <div class="form-group caixaUser">
+                    <div>
+                        <i class="fa fa-user"></i>
+                    </div>
+                </div>
+
+            <!-- ****************************** START ERROR ALERT ****************************** -->
+            {% if form.errors %}
+            <div class="alert alert-danger alert-dismissable">
+                <button
+                type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-hidden="true"
+                >
+                ×
+                </button>
+                <i class="fa fa-info-circle"></i> Nome de
+                <strong>usuário</strong> ou <strong>senha</strong> incorrecta, por
+                favor verifique as suas credenciais.
+            </div>
+            {% endif %}
+          <!-- ****************************** END ERROR ALERT ****************************** -->
+
+
+                <div class="login-wrap">
+                <input
+                type="text"
+                name="username"
+                class="form-control"
+                placeholder="Usuário"
+                autofocus
+                />
+                <br />
+                <input
+                type="password"
+                name="password"
+                class="form-control"
+                placeholder="Password"
+                />
+                <label class="checkbox">
+                <span class="pull-right"> </span>
+                </label>
+                <button class="btn btn-primary btn-block" type="submit">
+                Entrar
+                </button>
+                <hr />
+                <a href="#"><small class="">Forgot Password ?</small></a>
+            </div>
+                <!-- Lembrar senha -->
+                <!-- Entrar -->
+                <div class="form-group">
+                    <!-- {% url 'step:index' %} -->
+                    <a href="#criarconta" class="btn dsBtn-1" style="margin-top: 8px; width: 100%;">Registar-se</a> 
+                </div>
+                
+                
+                <!-- Link para registar-se -->
+                <small class="text-muted ml-2"> <a href="#">Esqueceu a senha?</a> </small>
+
+            </fieldset>
+        </form>
+        </div>
+    </div>
+{% endblock content %}

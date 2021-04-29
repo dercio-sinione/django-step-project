@@ -144,6 +144,6 @@ MEDIA_URL = '/media/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Configuração da rota de redirecionamento para as views que é necessário efectuar o login para acessar
-LOGIN_REDIRECT_URL = 'users:dilide-admin'
-LOGIN_URL = 'users:login'
+LOGIN_REDIRECT_URL = 'step:dasboard'
+LOGIN_URL = 'step:login'
 # LOGOUT_REDIRECT_URL = 'blog:login'
