@@ -42,7 +42,7 @@ class Entidades(models.Model):
 
 class Projectos(models.Model):
     categoria = models.ForeignKey(Categorias, on_delete=models.CASCADE)
-    descricao = models.TextField(default=None)
+    descricao = models.CharField(max_length=100, default=None)
     custos = models.IntegerField(default='0')
     dataEntrega = models.DateField(default=None, null=True)
     dataRegisto = models.DateTimeField(auto_now=True)
