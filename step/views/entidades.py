@@ -17,13 +17,16 @@ def entidades(request):
     context = {
         "result": Entidades.objects.all(),
         }
+    print(Entidades.objects.all())
     return render(request, 'step/entidades.html', context)
 
 
 @login_required
 def addentidades(request):
+    
+    print(request.POST)
     if request.method == 'POST':
-        form = FormEntidade()
+        form = FormEntidade(request.POST,)
         form.instance.user = request.user
 
         # Validar o formulario
