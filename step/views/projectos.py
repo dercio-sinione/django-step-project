@@ -25,6 +25,7 @@ def projectos(request):
 
 @login_required
 def addProjecto(request):
+    print(request.GET)
     if request.method == 'POST':
         # Formulario de registar Projectos
         form = FormProjecto(request.POST,)
@@ -34,10 +35,10 @@ def addProjecto(request):
         # Validar o formulario
         if form.is_valid():
             form.save()
-            titulo = form.cleaned_data.get('titulo')
+            descricao = form.cleaned_data.get('descricao')
             messages.success(
-                request, f'Projecto "{titulo}" criado com sucesso!')
-            return redirect('users:listarprojectos')
+                request, f'Projecto "{descricao}" criado com sucesso!')
+            return redirect('step:projectos')
         else:
             messages.error(
                 request, f'{form.errors}', extra_tags='danger')
