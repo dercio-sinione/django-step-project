@@ -49,7 +49,7 @@
 
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-user"></i>
-                                <span> {{current_user.nome}} <i class="caret"></i></span>
+                                <span> Dércio Sinione <i class="caret"></i></span>
                             </a>
                             <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
                                 <li class="dropdown-header text-center">Conta</li>
@@ -67,7 +67,6 @@
                                             <a href="#logout"><i class="fa fa-ban fa-fw pull-right"></i>Sair</a>
                                         </li>
                                     </ul>
-
                         </li>
                     </ul>
                 </div>
@@ -100,13 +99,13 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{% url 'step:dasboard' %}">
+                            <a href="{% url 'step:projectos' %}">
                                 <i class="fa fa-dropbox"></i> <span>Projectos</span>
                             </a>
                         </li>
 
                         <li class="">
-                            <a href="{% url 'step:dasboard' %}">
+                            <a href="{% url 'step:entidades' %}">
                                 <i class="fa fa-group"></i> <span>Entidades</span>
                             </a>
                         </li>
@@ -131,13 +130,11 @@
         <script src="{% static 'step/js/jquery.min.js' %}" type="text/javascript"></script>
         <script src="{% static 'step/js/bootstrap.min.js' %}" type="text/javascript"></script>
         <script src="{% static 'step/js/app.js" type="text/javascript"></script> 
-        <script src="{% static 'step/js//dsajax.js' %}"></script>  
-        <script src="{% static 'step/js//stepjs.js' %}"></script>
+        <script src="{% static 'step/js/dsajax.js' %}"></script>  
+        <script src="{% static 'step/js/stepjs.js' %}"></script>
         
         {% block individualScript %} 
         {% endblock individualScript %}
-        
-
 
     </body>
 </html>

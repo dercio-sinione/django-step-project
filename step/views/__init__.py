@@ -1,2 +1,4 @@
 from .index import index
-from .index import dasboard
+from .dasboard import dasboard
+from .entidades import entidades
+from .projectos import projectos
