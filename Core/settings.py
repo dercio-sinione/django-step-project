@@ -129,10 +129,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # # Configuração da rota de redirecionamento para as views que é necessário efectuar o login para acessar
-# LOGIN_REDIRECT_URL = 'blog:partidas'
-# LOGIN_URL = 'blog:login'
+LOGIN_REDIRECT_URL = 'step:dasboard'
+LOGIN_URL = 'step:login'
 
-# LOGOUT_REDIRECT_URL = 'blog:login'
+LOGOUT_REDIRECT_URL = 'step:index'
 
 
 # Configuração do local onde os ficheiros de upload serão guardados

@@ -11,5 +11,7 @@ urlpatterns = [
     path('dasboard/', views.dasboard, name='dasboard'),
     path('entidades/', views.entidades, name='entidades'),
     path('projectos/', views.projectos, name='projectos'),
-    path('login', auth_views.LoginView.as_view(template_name='step/login.html'), name='login'),
+    path('login/', auth_views.LoginView.as_view(template_name='step/login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 ]
+
