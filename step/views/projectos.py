@@ -10,7 +10,7 @@ class FormProjecto(forms.ModelForm):
         model = Projectos
         fields = ['categoria', 'descricao', 'custos', 'dataEntrega', 'estado',
                   'progresso', 'entidade']
-        
+
         widgets = {
             'dataEntrega': forms.DateInput(attrs={
                 'class': 'form-control',
