@@ -124,13 +124,13 @@
             </tr>
           </thead>
           <tbody>
-            {% if result %} {% for dados in result.items%}
+            {% if result %} {% for dados in result%}
             <tr>
               <td>{{ dados.id }}</td>
               <td>{{ dados.nome }}</td>
               <td>{{ dados.email }}</td>
               <td>{{ dados.contacto }}</td>
-              <td>0</td>
+              <td>{{ dados.projectos_set|length}}</td>
               {% comment %}
               <!-- <td>{{ getLenght(dados.projectos) }}</td>  -->
               {% endcomment %}
