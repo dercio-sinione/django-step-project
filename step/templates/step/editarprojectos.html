@@ -22,7 +22,21 @@
           method="POST"
           enctype="multipart/form-data"
         >
-          {% csrf_token %} {{form|crispy}}
+          {% csrf_token %}
+          
+            {% if categorias %}
+            <div class="form-group">
+              <label for="lselect">Categoria*</label>
+                <select class="form-control-select form-control m-b-10" name="categoria" id="lselect" required>
+                    <option class="select-option" disabled selected>Selecione a Categoria</option>
+                    {% for categoria in categorias %}
+                        <option class="select-option" value="{{ categoria.pk }}">{{ categoria.nome }}</option>
+                    {% endfor %}
+                </select>
+                <div class="help-block with-errors"></div>
+            </div>
+            {% endif %}
+           {{form|crispy}}
           <!-- Id da categoria -->
           <!-- <div class="form-group hidden">
             <input

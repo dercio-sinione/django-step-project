@@ -25,15 +25,19 @@
         >
 
 {% csrf_token %}
-          <!-- Estado -->
-          <div class="form-group">
-              <label for="selectestado">Estado</label>
-              <select class="form-control m-b-10" name="estado" id="selectestado">
-                  <option  value="parado">parado</option>
-                  <option value="em produção">em produção</option>
-                  <option value="concluído">concluído</option>
-              </select>
+
+            {% if categorias %}
+            <div class="form-group">
+              <label for="lselect">Categoria*</label>
+                <select class="form-control-select form-control m-b-10" name="categoria" id="lselect" required>
+                    <option class="select-option" value="" disabled selected>Selecione a Categoria</option>
+                    {% for categoria in categorias %}
+                        <option class="select-option" value="{{ categoria.pk }}">{{ categoria.nome }}</option>
+                    {% endfor %}
+                </select>
+                <div class="help-block with-errors"></div>
             </div>
+            {% endif %}
            {{form|crispy}}
           <!-- Id da categoria -->
           <!-- <div class="form-group hidden">

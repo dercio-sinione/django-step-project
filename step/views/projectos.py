@@ -9,7 +9,7 @@ class FormProjecto(forms.ModelForm):
     # model_to_filter = CustomModelFilter(queryset=CustomModel.objects.filter(active=1))
     class Meta:
         model = Projectos
-        fields = ['categoria', 'descricao', 'custos', 'dataEntrega', 'estado',
+        fields = ['descricao', 'custos', 'dataEntrega', 'estado',
                   'progresso', 'projecto']
 
         widgets = {
@@ -31,6 +31,7 @@ def projectos(request):
 @login_required
 def addProjecto(request):
     entidade = None
+    categorias = Categorias.objects.filter(user=request.user)
     if request.method== 'GET':
         entidade = Entidades.objects.get(pk=request.GET['en'])
         
@@ -39,15 +40,11 @@ def addProjecto(request):
     
     
     if request.method == 'POST':
-        # Formulario de registar Projectos
         form = FormProjecto(request.POST, request.FILES,)
-        # files = request.FILES['file_field']
-        # form.instance.projecto = files
-        # print(request.FILES['file_field'])
-        # form = FormProjecto(request.POST, request.FILES,)
         form.instance.user = request.user
         entidade = Entidades.objects.get(pk=request.POST['idEntidade'])
         form.instance.entidade = entidade
+        form.instance.categoria = Categorias.objects.get(pk=request.POST['categoria'])
         
         # Validar o formulario
         if form.is_valid():
@@ -60,13 +57,13 @@ def addProjecto(request):
             messages.error(
                 request, f'{form.errors}', extra_tags='danger')
 
-    context = {'form': form, 'entidade': entidade}
+    context = {'form': form, 'entidade': entidade, 'categorias': categorias}
     return render(request, 'step/addprojectos.html', context)
 
 
 @login_required
 def editarProjecto(request, pk):
-    
+    categorias = Categorias.objects.filter(user=request.user)
     obj = get_object_or_404(Projectos, pk=pk)
     if request.method == 'POST':
         obj = get_object_or_404(Projectos, pk=pk)
@@ -74,6 +71,8 @@ def editarProjecto(request, pk):
         form.instance.pk = obj.pk
         form.instance.user = obj.user
         form.instance.entidade = obj.entidade
+        form.instance.categoria = Categorias.objects.get(pk=request.POST['categoria'])
+        
         # Validar o formulario
         if form.is_valid():
             form.save()
@@ -87,7 +86,7 @@ def editarProjecto(request, pk):
     else:
         form = FormProjecto(instance=obj)
 
-    context = {'form': form, 'entidade': obj.entidade}
+    context = {'form': form, 'entidade': obj.entidade, 'categorias': categorias}
     return render(request, 'step/editarprojectos.html', context)
 
 
