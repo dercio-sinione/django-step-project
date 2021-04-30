@@ -48,7 +48,7 @@ def addProjecto(request):
         
         # Validar o formulario
         if form.is_valid():
-            # form.save()
+            form.save()
             # descricao = form.cleaned_data.get('descricao')
             descricao = request.POST['descricao']
             messages.success(
