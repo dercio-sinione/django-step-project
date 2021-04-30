@@ -8,6 +8,7 @@ app_name = 'step'
 urlpatterns = [
     path('', views.index, name='index'),
     path('index/', views.index, name='index'),
+    path('perfil/', views.perfil,name='perfil'),
     path('registar/', views.registar, name='registar'),
     path('dasboard/', views.dasboard, name='dasboard'),
     path('entidades/', views.entidades, name='entidades'),
