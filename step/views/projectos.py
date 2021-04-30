@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from django import forms
 
@@ -62,23 +62,77 @@ def addProjecto(request):
 
 
 # @login_required
-# def changeProjecto(request, pk):
+# def editarProjecto(request, pk):
 #     obj = get_object_or_404(Projectos, pk=pk)
+        
+#     form = FormProjecto(instance=obj)
+#     form.instance.entidade = obj.entidade
+    
+
 #     if request.method == 'POST':
 #         form = FormProjecto(request.POST, request.FILES, instance=obj)
-#         form.instance.criadoPor = request.user
-
+#         form.instance.user = request.user
+#         form.instance.entidade = obj.entidade
+        
+#         file = request.FILES.get('projecto')
+#         if file:
+#             form.instance.projecto = file
+#         else:
+#             form.instance.projecto = obj.projecto
+            
 #         # Validar o formulario
 #         if form.is_valid():
 #             form.save()
-#             titulo = form.cleaned_data.get('titulo')
-
+#             descricao = form.cleaned_data.get('descricao')
 #             messages.success(
-#                 request, f'Projecto "{titulo}" alterado com sucesso!')
-#             return redirect('users:listarprojectos')
+#                 request, f'Projecto "{descricao}" criado com sucesso!')
+#             return redirect('step:projectos')
 #         else:
 #             messages.error(
 #                 request, f'{form.errors}', extra_tags='danger')
-#     else:
-#         form = FormProjecto(instance=obj)
-#     return render(request, 'users/editarProjecto.html', {'form': form})
+
+#     context = {'form': form, 'entidade': obj.entidade}
+#     return render(request, 'step/editarprojectos.html', context)
+
+
+@login_required
+def editarProjecto(request, pk):
+
+    obj = get_object_or_404(Projectos, pk=pk)
+    if request.method == 'POST':
+        form = FormProjecto(request.POST, request.FILES, instance=obj)
+        form.instance.pk = obj.pk
+        form.instance.user = obj.user
+        form.instance.entidade = obj.entidade
+                        
+        # file = request.FILES.get('projecto')
+        # if file:
+        #     form.instance.projecto = file
+        # else:
+        #     form.instance.projecto = obj.projecto
+
+
+        # Validar o formulario
+        if form.is_valid():
+            form.save()
+            descricao = form.cleaned_data.get('descricao')
+            messages.success(
+                request, f'Projecto "{descricao}" editado com sucesso!')
+            return redirect('step:projectos')
+        else:
+            messages.error(
+                request, f'{form.errors}', extra_tags='danger')
+    else:
+        form = FormProjecto(instance=obj)
+    return render(request, 'step/editarProjecto.html', {'form': form})
+
+
+
+@login_required
+def deleteProjecto(request, pk):
+    obj = get_object_or_404(Projectos, pk=pk)
+    obj.delete()
+    # Criar mensagem de sucesso, pois a operação foi efectuada com sucesso.
+    messages.success(
+        request, f'Projecto "{obj.descricao}" eliminada com sucesso!')
+    return redirect('step:projectos')

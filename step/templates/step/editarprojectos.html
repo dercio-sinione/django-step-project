@@ -1,0 +1,155 @@
+{% extends 'step/baseAdmin.html' %} {% load static %} {% block content %} 
+{% load crispy_forms_tags %}
+<div class="row">
+  <div class="col-md-12">
+    <!--breadcrumbs start -->
+    <ul class="breadcrumb">
+      <li class="active">Adicionar Projectos</li>
+    </ul>
+  </div>
+</div>
+<!-- Mensagens -->
+<div class="col-lg-12">{% include "step/alerts.html" %}</div>
+
+<section class="row">
+  <div class="col-lg-7">
+    <section class="panel">
+      <header class="panel-heading">Formulário</header>
+      <div class="panel-body">
+        <form
+          role="form"
+          name="formProjectos"
+          method="POST"
+          action="{% url 'step:addprojecto' %}"
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %} {{form|crispy}}
+          <!-- Id da categoria -->
+          <!-- <div class="form-group hidden">
+            <input
+              type="text"
+              name="idCategoria"
+              class="form-control"
+              value=""
+              placeholder="Nome"
+              readonly
+            />
+          </div> -->
+
+          <!-- Categoria -->
+          <!-- <div class="form-group">
+            <input
+              type="text"
+              name="categoria"
+              class="form-control"
+              value=""
+              placeholder="Nome"
+              readonly
+            />
+          </div> -->
+
+          <!-- Descrição -->
+          <!-- <div class="form-group">
+            <input
+              type="text"
+              name="descricao"
+              class="form-control"
+              value=""
+              placeholder="Nome"
+              readonly
+            />
+          </div> -->
+
+          <!-- custos -->
+          <!-- <div class="form-group">
+            <label for="">Custos</label>
+            <input
+              type="number"
+              class="form-control form-control is-invalid"
+              value="{{form.custos.data}}"
+              name="custos"
+              placeholder="Custos"
+              autocomplete="off"
+            />
+          </div> -->
+
+          <!-- Estado -->
+          <!-- <div class="form-group">
+            <label for="selectestado">Estado</label>
+            <select class="form-control m-b-10" name="estado" id="selectestado">
+              <option value="parado">parado</option>
+              <option value="em produção">em produção</option>
+              <option value="concluído">concluído</option>
+            </select>
+          </div> -->
+
+          <!-- Progresso -->
+          <!-- <div class="form-group">
+            <label for="">Progresso</label>
+            <input
+              type="number"
+              maxlength="3"
+              class="form-control form-control is-invalid"
+              value="{{form.progresso.data}}"
+              name="progresso"
+              placeholder="Progresso"
+              autocomplete="off"
+            />
+          </div> -->
+
+          <!-- Id da Entidade -->
+          <div class="form-group hidden">
+            <input
+              type="text"
+              name="idEntidade"
+              class="form-control"
+              value="{{entidade.pk}}"
+              placeholder="Id Entidade"
+              readonly
+            />
+          </div>
+
+          <!-- Entidade -->
+          <div class="form-group">
+            <input
+              type="text"
+              name="entidade"
+              class="form-control"
+              value="{{entidade}}"
+              placeholder="Entidade"
+              readonly
+            />
+          </div>
+
+          <!-- Data de entrega -->
+          <!-- <div class="form-group">
+            <label for="dataEntrega">Data de Entrega</label>
+
+            <input
+              type="date"
+              value="{{form.dataEntrega.data}}"
+              name="dataEntrega"
+              class="form-control form-control is-invalid"
+              id="dataEntrega"
+              placeholder="Data de Entrega"
+            />
+          </div> -->
+
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">Adicionar</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </div>
+
+
+</section>
+
+{% block individualScript %}
+<script src="{% static 'step/js/step/projectos.js' %}"></script>
+{% endblock individualScript %}
+
+<!-- Formulario -->
+{% endblock content %}
+

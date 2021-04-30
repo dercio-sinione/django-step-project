@@ -47,7 +47,7 @@ class Projectos(models.Model):
     dataEntrega = models.DateField(default=None, null=True)
     dataRegisto = models.DateTimeField(auto_now=True)
     estado = models.CharField(max_length=100, null=False, default='prado', choices=ops)
-    projecto = models.FileField(upload_to='Projectos', default=None)
+    projecto = models.FileField(upload_to='Projectos', default=None, blank=True, null=True)
     progresso = models.IntegerField(default='0')
     dataConclusao = models.DateField(default=None, null=True, blank=True)
     entidade = models.ForeignKey(Entidades, on_delete=models.CASCADE)

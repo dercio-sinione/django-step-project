@@ -60,7 +60,7 @@
               <th>Custos</th>
               <th>Data de entrega</th>
               <th>Estado</th>
-              <th>projecto</th>
+              <th>Projecto</th>
               <th>Progresso</th>
               <th>Ações</th>
             </tr>
@@ -90,7 +90,7 @@
               <td><span class="badge badge-dark">{{ dados.estado }}</span></td>
               {% endif %}
 
-              {% if dados.projecto.url %}
+              {% if dados.projecto %}
               <td><a href="{{ dados.projecto.url }}">Documento</a></td>
               {% else %}
               <td>Sem Ducumento</td>
@@ -117,13 +117,14 @@
 
               <td>
                 <!-- Editar -->
-                <a href="/projectos/update?en={{dados.id}}"
+                <!-- <a href="/projecto/editar/?en={{dados.id}}" -->
+                <a href="{% url 'step:editarProjecto' dados.id %}"
                   ><button class="btn btn-default btn-xs">
                     <i class="fa fa-pencil"></i></button
                 ></a>
                 <!-- Eliminar -->
                 <a
-                  onclick="fnIdselecionado('/projectos/{{dados.id}}/delete')"
+                  onclick="fnIdselecionado('/projecto/{{dados.id}}/eliminar')"
                   data-toggle="modal"
                   data-target="#ModalConfirm"
                   ><button class="btn btn-default btn-xs">
