@@ -10,8 +10,7 @@
   </div>
 
   <div class="col-md-12">
-    <!-- Mostrar Mensagens enviadas pelo Servidor -->
-    {% comment %} {% include 'message.html' %} {% endcomment %}
+  <div class="col-lg-12">{% include "step/alerts.html" %}</div>
   </div>
 
   <!-- Pesquisar projectos -->
@@ -66,7 +65,7 @@
             </tr>
           </thead>
           <tbody>
-            {% if result %} {% for dados in result.items%}
+            {% if projectos %} {% for dados in projectos%}
             <tr>
               <td>{{ dados.id }}</td>
               <td>{{ dados.categoria.nome }}</td>

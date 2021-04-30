@@ -21,6 +21,7 @@
           name="formProjectos"
           method="POST"
           action="{% url 'step:addprojecto' %}"
+          enctype="multipart/form-data"
         >
           {% csrf_token %} {{form|crispy}}
           <!-- Id da categoria -->
@@ -97,8 +98,7 @@
           </div> -->
 
           <!-- Id da Entidade -->
-          <!-- <div class="form-group hidden"> -->
-          <div class="form-group">
+          <div class="form-group hidden">
             <input
               type="text"
               name="idEntidade"
@@ -152,3 +152,4 @@
 
 <!-- Formulario -->
 {% endblock content %}
+

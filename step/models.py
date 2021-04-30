@@ -40,15 +40,16 @@ class Entidades(models.Model):
         return f'{self.nome}'
     
 class Projectos(models.Model):
-    ops = [('1', 'Parado'),('2', 'Concluído'), ('3', 'Em produção')]
+    ops = [('Parado', 'Parado'),('Concluído', 'Concluído'), ('Em produção', 'Em produção')]
     categoria = models.ForeignKey(Categorias, on_delete=models.CASCADE)
     descricao = models.CharField(max_length=100, default=None)
     custos = models.IntegerField(default='0')
     dataEntrega = models.DateField(default=None, null=True)
     dataRegisto = models.DateTimeField(auto_now=True)
     estado = models.CharField(max_length=100, null=False, default='prado', choices=ops)
+    projecto = models.FileField(upload_to='Projectos', default=None)
     progresso = models.IntegerField(default='0')
-    dataConclusao = models.DateField(default=None, null=True)
+    dataConclusao = models.DateField(default=None, null=True, blank=True)
     entidade = models.ForeignKey(Entidades, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 

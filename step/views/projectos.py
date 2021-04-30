@@ -9,7 +9,7 @@ class FormProjecto(forms.ModelForm):
     class Meta:
         model = Projectos
         fields = ['categoria', 'descricao', 'custos', 'dataEntrega', 'estado',
-                  'progresso', ]
+                  'progresso', 'projecto']
 
         widgets = {
             'dataEntrega': forms.DateInput(attrs={
@@ -17,10 +17,12 @@ class FormProjecto(forms.ModelForm):
                 'type': 'date'}),
         }
 
-
 @login_required
 def projectos(request):
-    return render(request, 'step/projectos.html',)
+    context = {
+        'projectos': Projectos.objects.all()
+        }
+    return render(request, 'step/projectos.html', context)
 
 
 @login_required
@@ -29,14 +31,16 @@ def addProjecto(request):
     if request.method== 'GET':
         entidade = Entidades.objects.get(pk=request.GET['en'])
         
-    categorias= Categorias.objects.all()
     form = FormProjecto()
     form.instance.entidade = entidade
     
 
     if request.method == 'POST':
         # Formulario de registar Projectos
-        form = FormProjecto(request.POST,)
+        form = FormProjecto(request.POST, request.FILES,)
+        # files = request.FILES['file_field']
+        # form.instance.projecto = files
+        # print(request.FILES['file_field'])
         # form = FormProjecto(request.POST, request.FILES,)
         form.instance.user = request.user
         entidade = Entidades.objects.get(pk=request.POST['idEntidade'])
@@ -52,7 +56,9 @@ def addProjecto(request):
         else:
             messages.error(
                 request, f'{form.errors}', extra_tags='danger')
-    return render(request, 'step/addprojectos.html', {'form': form, 'categorias': categorias, 'entidade': entidade})
+
+    context = {'form': form, 'entidade': entidade}
+    return render(request, 'step/addprojectos.html', context)
 
 
 # @login_required
