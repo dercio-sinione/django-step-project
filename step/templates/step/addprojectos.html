@@ -23,7 +23,18 @@
           action="{% url 'step:addprojecto' %}"
           enctype="multipart/form-data"
         >
-          {% csrf_token %} {{form|crispy}}
+
+{% csrf_token %}
+          <!-- Estado -->
+          <div class="form-group">
+              <label for="selectestado">Estado</label>
+              <select class="form-control m-b-10" name="estado" id="selectestado">
+                  <option  value="parado">parado</option>
+                  <option value="em produção">em produção</option>
+                  <option value="concluído">concluído</option>
+              </select>
+            </div>
+           {{form|crispy}}
           <!-- Id da categoria -->
           <!-- <div class="form-group hidden">
             <input
