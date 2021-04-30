@@ -15,7 +15,7 @@ class FormEntidade(forms.ModelForm):
 @login_required
 def entidades(request):
     context = {
-        "result": Entidades.objects.all(),
+        "result": Entidades.objects.filter(user=request.user),
         }
     return render(request, 'step/entidades.html', context)
 

@@ -15,7 +15,7 @@ class FormCategoria(forms.ModelForm):
 @login_required
 def categorias(request):
     context = {
-        "categorias": Categorias.objects.all(),
+        "categorias": Categorias.objects.filter(user=request.user)
         }
     return render(request, 'step/categorias.html', context)
 

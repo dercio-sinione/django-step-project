@@ -6,6 +6,7 @@ from django import forms
 from step.models import Entidades, Projectos, Categorias
 
 class FormProjecto(forms.ModelForm):
+    # model_to_filter = CustomModelFilter(queryset=CustomModel.objects.filter(active=1))
     class Meta:
         model = Projectos
         fields = ['categoria', 'descricao', 'custos', 'dataEntrega', 'estado',
@@ -16,11 +17,13 @@ class FormProjecto(forms.ModelForm):
                 'class': 'form-control',
                 'type': 'date'}),
         }
+        
+
 
 @login_required
 def projectos(request):
     context = {
-        'projectos': Projectos.objects.all()
+        'projectos': Projectos.objects.filter(user=request.user)
         }
     return render(request, 'step/projectos.html', context)
 
@@ -34,7 +37,7 @@ def addProjecto(request):
     form = FormProjecto()
     form.instance.entidade = entidade
     
-
+    
     if request.method == 'POST':
         # Formulario de registar Projectos
         form = FormProjecto(request.POST, request.FILES,)
@@ -59,40 +62,6 @@ def addProjecto(request):
 
     context = {'form': form, 'entidade': entidade}
     return render(request, 'step/addprojectos.html', context)
-
-
-# @login_required
-# def editarProjecto(request, pk):
-#     obj = get_object_or_404(Projectos, pk=pk)
-        
-#     form = FormProjecto(instance=obj)
-#     form.instance.entidade = obj.entidade
-    
-
-#     if request.method == 'POST':
-#         form = FormProjecto(request.POST, request.FILES, instance=obj)
-#         form.instance.user = request.user
-#         form.instance.entidade = obj.entidade
-        
-#         file = request.FILES.get('projecto')
-#         if file:
-#             form.instance.projecto = file
-#         else:
-#             form.instance.projecto = obj.projecto
-            
-#         # Validar o formulario
-#         if form.is_valid():
-#             form.save()
-#             descricao = form.cleaned_data.get('descricao')
-#             messages.success(
-#                 request, f'Projecto "{descricao}" criado com sucesso!')
-#             return redirect('step:projectos')
-#         else:
-#             messages.error(
-#                 request, f'{form.errors}', extra_tags='danger')
-
-#     context = {'form': form, 'entidade': obj.entidade}
-#     return render(request, 'step/editarprojectos.html', context)
 
 
 @login_required
