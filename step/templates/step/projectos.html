@@ -60,6 +60,7 @@
               <th>Custos</th>
               <th>Data de entrega</th>
               <th>Estado</th>
+              <th>projecto</th>
               <th>Progresso</th>
               <th>Ações</th>
             </tr>
@@ -87,6 +88,12 @@
               </td>
               {% else %}
               <td><span class="badge badge-dark">{{ dados.estado }}</span></td>
+              {% endif %}
+
+              {% if dados.projecto.url %}
+              <td><a href="{{ dados.projecto.url }}">Documento</a></td>
+              {% else %}
+              <td>Sem Ducumento</td>
               {% endif %}
 
               <!-- Verificações de progresso -->
