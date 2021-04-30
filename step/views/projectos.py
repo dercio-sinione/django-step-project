@@ -123,7 +123,7 @@ def editarProjecto(request, pk):
             print(form.instance.projecto)
             print(obj.projecto)
             print('**********')
-            # form.save()
+            form.save()
             descricao = form.cleaned_data.get('descricao')
             messages.success(
                 request, f'Projecto "{descricao}" editado com sucesso!')
