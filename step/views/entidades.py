@@ -42,6 +42,7 @@ def addentidades(request):
         form = FormEntidade()
     return render(request, 'step/entidades.html', {'form': form})
 
+
 @login_required
 def editarentidades(request, pk):
     obj = get_object_or_404(Entidades, pk=pk)
