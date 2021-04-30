@@ -43,7 +43,7 @@
 <!-- Entidades -->
 <div class="row">
   <!-- formulario -->
-  <div class="col-lg-6">
+  <div class="col-lg-4">
     <section class="panel">
       <header class="panel-heading">Formulário</header>
       <div class="panel-body">
@@ -82,7 +82,7 @@
   </div>
 
   <!-- Tabela de Entidades -->
-  <div class="col-md-6">
+  <div class="col-md-8">
     <section class="panel">
       <header class="panel-heading">Categorias Registadas</header>
 
@@ -95,6 +95,8 @@
             <tr>
               <th>ID</th>
               <th>Nome</th>
+              <th>Data. Registo</th>
+              <th>Data. Edição</th>
               <th>Ações</th>
             </tr>
           </thead>
@@ -103,6 +105,8 @@
             <tr>
               <td>{{ dados.id }}</td>
               <td>{{ dados.nome }}</td>
+              <td>{{ dados.dataRegisto|date }}</td>
+              <td>{{ dados.dataModificacao|date }}</td>
           
               <td>
                 <a onclick="PassarDados('/categoria/{{dados.id}}/editar/')"
@@ -115,13 +119,6 @@
                   data-target="#ModalConfirm"
                   ><button class="btn btn-default btn-xs">
                     <i class="fa fa-times"></i></button
-                ></a>
-                <a href="/projecto/add/?en={{dados.id}}"
-                  ><button class="btn btn-default btn-xs">
-                    <i
-                      class="fa fa-plus-circle"
-                      title="Adicionar Projecto"
-                    ></i></button
                 ></a>
               </td>
             </tr>
