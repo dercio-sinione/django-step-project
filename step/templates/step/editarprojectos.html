@@ -4,7 +4,7 @@
   <div class="col-md-12">
     <!--breadcrumbs start -->
     <ul class="breadcrumb">
-      <li class="active">Adicionar Projectos</li>
+      <li class="active">Editar Projecto</li>
     </ul>
   </div>
 </div>
@@ -20,7 +20,6 @@
           role="form"
           name="formProjectos"
           method="POST"
-          action="{% url 'step:addprojecto' %}"
           enctype="multipart/form-data"
         >
           {% csrf_token %} {{form|crispy}}

@@ -97,9 +97,14 @@ def addProjecto(request):
 
 @login_required
 def editarProjecto(request, pk):
-
+    
+    print('----------------')
     obj = get_object_or_404(Projectos, pk=pk)
     if request.method == 'POST':
+        print('----------------')
+        print('----------------')
+        print('----------------')
+        obj = get_object_or_404(Projectos, pk=pk)
         form = FormProjecto(request.POST, request.FILES, instance=obj)
         form.instance.pk = obj.pk
         form.instance.user = obj.user
@@ -110,11 +115,15 @@ def editarProjecto(request, pk):
         #     form.instance.projecto = file
         # else:
         #     form.instance.projecto = obj.projecto
-
+        
 
         # Validar o formulario
         if form.is_valid():
-            form.save()
+            print('**********')
+            print(form.instance.projecto)
+            print(obj.projecto)
+            print('**********')
+            # form.save()
             descricao = form.cleaned_data.get('descricao')
             messages.success(
                 request, f'Projecto "{descricao}" editado com sucesso!')
@@ -124,7 +133,10 @@ def editarProjecto(request, pk):
                 request, f'{form.errors}', extra_tags='danger')
     else:
         form = FormProjecto(instance=obj)
-    return render(request, 'step/editarProjecto.html', {'form': form})
+
+    context = {'form': form, 'entidade': obj.entidade}
+    return render(request, 'step/editarprojectos.html', context)
+
 
 
 
