@@ -19,6 +19,6 @@ def dasboard(request):
         'parados': Projectos.objects.filter(user=request.user, estado='Parado').count(),
         'producao': Projectos.objects.filter(user=request.user, estado='Em produção').count(),
         'concluidos': Projectos.objects.filter(user=request.user, estado='Concluído').count(),
-        'alert': Notificacoes.objects.all()[:4],
+        'alert': Notificacoes.objects.order_by('-id').filter(user=request.user)[:4],
     }
     return render(request, 'step/dasboard.html', context)
