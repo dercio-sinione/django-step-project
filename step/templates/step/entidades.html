@@ -136,12 +136,12 @@
               {% endcomment %}
 
               <td>
-                <a onclick="PassarDados('/entidades/{{dados.id}}/update')"
+                <a onclick="PassarDados('/entidade/{{dados.id}}/editar/')"
                   ><button class="btn btn-default btn-xs">
                     <i class="fa fa-pencil"></i></button
                 ></a>
                 <a
-                  onclick="fnIdselecionado('/entidades/{{dados.id}}/delete')"
+                  onclick="fnIdselecionado('/entidade/{{dados.id}}/eliminar/')"
                   data-toggle="modal"
                   data-target="#ModalConfirm"
                   ><button class="btn btn-default btn-xs">

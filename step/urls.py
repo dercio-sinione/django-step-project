@@ -10,6 +10,7 @@ urlpatterns = [
     path('index/', views.index, name='index'),
     path('dasboard/', views.dasboard, name='dasboard'),
     path('entidades/', views.entidades, name='entidades'),
+    path('entidade/<int:pk>/editar/', views.editarentidades, name='editarEntidades'),
     path('entidades/add/', views.addentidades, name='addEntidades'),
     path('projectos/', views.projectos, name='projectos'),
     path('projecto/add/', views.addProjecto, name='addprojecto'),

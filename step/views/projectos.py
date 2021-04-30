@@ -98,31 +98,15 @@ def addProjecto(request):
 @login_required
 def editarProjecto(request, pk):
     
-    print('----------------')
     obj = get_object_or_404(Projectos, pk=pk)
     if request.method == 'POST':
-        print('----------------')
-        print('----------------')
-        print('----------------')
         obj = get_object_or_404(Projectos, pk=pk)
         form = FormProjecto(request.POST, request.FILES, instance=obj)
         form.instance.pk = obj.pk
         form.instance.user = obj.user
         form.instance.entidade = obj.entidade
-                        
-        # file = request.FILES.get('projecto')
-        # if file:
-        #     form.instance.projecto = file
-        # else:
-        #     form.instance.projecto = obj.projecto
-        
-
         # Validar o formulario
         if form.is_valid():
-            print('**********')
-            print(form.instance.projecto)
-            print(obj.projecto)
-            print('**********')
             form.save()
             descricao = form.cleaned_data.get('descricao')
             messages.success(
