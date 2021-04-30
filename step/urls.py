@@ -12,6 +12,7 @@ urlpatterns = [
     path('entidades/', views.entidades, name='entidades'),
     path('entidade/<int:pk>/editar/', views.editarentidades, name='editarEntidades'),
     path('entidades/add/', views.addentidades, name='addEntidades'),
+    path('entidade/<int:pk>/eliminar/', views.deleteEntidade, name='eliminarEntidade'),
     path('projectos/', views.projectos, name='projectos'),
     path('projecto/add/', views.addProjecto, name='addprojecto'),
     path('projecto/<int:pk>/editar/', views.editarProjecto, name='editarProjecto'),
