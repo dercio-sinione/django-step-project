@@ -86,7 +86,7 @@ def editarProjecto(request, pk):
     else:
         form = FormProjecto(instance=obj)
 
-    context = {'form': form, 'entidade': obj.entidade, 'categorias': categorias}
+    context = {'form': form, 'entidade': obj.entidade, 'categorias': categorias, 'categoriaS': obj.categoria.pk}
     return render(request, 'step/editarprojectos.html', context)
 
 

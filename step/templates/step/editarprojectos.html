@@ -28,9 +28,14 @@
             <div class="form-group">
               <label for="lselect">Categoria*</label>
                 <select class="form-control-select form-control m-b-10" name="categoria" id="lselect" required>
-                    <option class="select-option" disabled selected>Selecione a Categoria</option>
+                    <option class="select-option" disabled>Selecione a Categoria</option>
                     {% for categoria in categorias %}
-                        <option class="select-option" value="{{ categoria.pk }}">{{ categoria.nome }}</option>
+                    {% if categoria.pk is categoriaS %}
+                      <option class="select-option" value="{{ categoria.pk }}" selected>{{ categoria.nome }}</option>
+                    {% else %}
+                      <option class="select-option" value="{{ categoria.pk }}">{{ categoria.nome }}</option>
+                    {% endif %}
+
                     {% endfor %}
                 </select>
                 <div class="help-block with-errors"></div>
