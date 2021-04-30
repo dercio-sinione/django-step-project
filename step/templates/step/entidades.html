@@ -127,16 +127,14 @@
             </tr>
           </thead>
           <tbody>
+            
             {% if result %} {% for dados in result%}
             <tr>
               <td>{{ dados.id }}</td>
               <td>{{ dados.nome }}</td>
               <td>{{ dados.email }}</td>
               <td>{{ dados.contacto }}</td>
-              <td>{{ dados.projectos_set|length}}</td>
-              {% comment %}
-              <!-- <td>{{ getLenght(dados.projectos) }}</td>  -->
-              {% endcomment %}
+              <td>{{ dados.projectos_set.count}}</td>
 
               <td>
                 <a onclick="PassarDados('/entidade/{{dados.id}}/editar/')"

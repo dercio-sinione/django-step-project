@@ -17,6 +17,8 @@ def entidades(request):
     context = {
         "result": Entidades.objects.filter(user=request.user),
         }
+    # e = Entidades.objects.first()
+    # e.projectos.all()
     return render(request, 'step/entidades.html', context)
 
 
