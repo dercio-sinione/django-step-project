@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
-from step.models import Notificacoes
+from step.models import Notificacoes, Projectos
 
 @login_required
 def dasboard(request):
@@ -15,10 +15,10 @@ def dasboard(request):
     # alert = Notificacoes.query.filter_by(idUser=current_user.id).all()
 
     context = {
-        'total': 2,
-        'parados': 2,
-        'producao': 2,
-        'concluidos': 2,
+        'total': Projectos.objects.filter(user=request.user).count(),
+        'parados': Projectos.objects.filter(user=request.user, estado='Parado').count(),
+        'producao': Projectos.objects.filter(user=request.user, estado='Em produção').count(),
+        'concluidos': Projectos.objects.filter(user=request.user, estado='Concluído').count(),
         'alert': Notificacoes.objects.all()[:4],
     }
     return render(request, 'step/dasboard.html', context)
