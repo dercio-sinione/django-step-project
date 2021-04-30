@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from django import forms
 
-from step.models import Entidades, Projectos, Categorias
+from step.models import Entidades, Notificacoes, Projectos, Categorias
 
 class FormProjecto(forms.ModelForm):
     # model_to_filter = CustomModelFilter(queryset=CustomModel.objects.filter(active=1))
@@ -48,10 +48,15 @@ def addProjecto(request):
         
         # Validar o formulario
         if form.is_valid():
-            form.save()
-            descricao = form.cleaned_data.get('descricao')
+            # form.save()
+            # descricao = form.cleaned_data.get('descricao')
+            descricao = request.POST['descricao']
             messages.success(
                 request, f'Projecto "{descricao}" criado com sucesso!')
+            # create_notificacao = Notificacoes(titulo=titulo_not,categoria='info',projecto=form.descricao.data,idUser=current_user.id)
+            titulo_not = f"Novo Projecto! Foi adicionado recentemente o projecto {descricao}."
+            notification = Notificacoes(titulo=titulo_not, categoria='info', projecto=descricao, user=request.user)
+            notification.save()
             return redirect('step:projectos')
         else:
             messages.error(
